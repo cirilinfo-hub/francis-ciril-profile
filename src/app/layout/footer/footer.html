@@ -1,0 +1,26 @@
+<footer class="footer">
+  <div class="container inner">
+    <div>
+      <p class="name">{{ profile.name }}</p>
+      <p class="muted">Front-End Architect · Angular · React · TypeScript</p>
+    </div>
+    <ul class="social" aria-label="Social profiles">
+      @for (link of profile.social; track link.id) {
+        <li>
+          <a class="icon-btn" [href]="link.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="link.label + ' (opens in a new tab)'">
+            @if (link.id === 'github') {
+              <app-icon name="github" [size]="20" />
+            } @else {
+              <span class="in" aria-hidden="true">in</span>
+            }
+          </a>
+        </li>
+      }
+    </ul>
+    <a class="top" href="#home" (click)="toTop($event)">
+      Back to top
+      <app-icon name="arrow-up-right" [size]="16" />
+    </a>
+  </div>
+  <p class="container copy muted">© {{ year }} {{ profile.name }}. Built with Angular and ECharts.</p>
+</footer>

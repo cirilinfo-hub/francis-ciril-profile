@@ -1,0 +1,110 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="Architecture & technical expertise"
+    title="How I structure enterprise front ends"
+    lead="Explore the layers of a scalable front end and the path from legacy assets to a reusable component ecosystem. Solid outlines are backed by my résumé; dashed outlines are architectural interests I apply or explore."
+    headingId="architecture-title"
+  />
+
+  <div class="legend" aria-label="Legend">
+    <span class="key"><i class="swatch solid"></i> Resume-backed ({{ counts.resume }})</span>
+    <span class="key"><i class="swatch dashed"></i> Architectural interest ({{ counts.interest }})</span>
+  </div>
+
+  <div class="views" role="tablist" aria-label="Diagram view">
+    <button type="button" role="tab" class="view" id="tab-layers" aria-controls="diagram-panel" [attr.aria-selected]="view() === 'layers'" [class.selected]="view() === 'layers'" (click)="setView('layers')">
+      <app-icon name="layers" [size]="18" /> Layered architecture
+    </button>
+    <button type="button" role="tab" class="view" id="tab-ecosystem" aria-controls="diagram-panel" [attr.aria-selected]="view() === 'ecosystem'" [class.selected]="view() === 'ecosystem'" (click)="setView('ecosystem')">
+      <app-icon name="component" [size]="18" /> Component ecosystem
+    </button>
+  </div>
+
+  <div id="diagram-panel" class="diagram glass" role="tabpanel" [attr.aria-labelledby]="'tab-' + view()" appReveal>
+    @if (view() === 'layers') {
+      <div class="layers" animate.enter="swap">
+        @for (layer of layers; track layer.id; let last = $last) {
+          <div class="layer" [class.has-arrow]="!last">
+            <h3 class="layer-title">{{ layer.title }}</h3>
+            <ul class="nodes">
+              @for (node of layer.nodes; track node.id) {
+                <li>
+                  <button
+                    type="button"
+                    class="node"
+                    [class.interest]="node.source === 'interest'"
+                    [class.selected]="selectedNodeId() === node.id"
+                    [attr.aria-pressed]="selectedNodeId() === node.id"
+                    (click)="selectNode(node.id)"
+                  >
+                    <app-icon [name]="node.icon" [size]="18" /> {{ node.title }}
+                  </button>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+      <aside class="detail" aria-live="polite">
+        <span class="detail-icon"><app-icon [name]="selectedNode().icon" [size]="28" /></span>
+        <h3>{{ selectedNode().title }}</h3>
+        <p class="badge" [class.interest]="selectedNode().source === 'interest'">
+          {{ selectedNode().source === 'resume' ? 'Backed by résumé experience' : 'Architectural interest' }}
+        </p>
+        <p>{{ selectedNode().detail }}</p>
+      </aside>
+    } @else {
+      <div class="flow-wrap" animate.enter="swap">
+        <ol class="flow">
+          @for (step of steps; track step.id; let last = $last) {
+            <li class="step" [class.last]="last">
+              <button
+                type="button"
+                class="step-btn"
+                [class.selected]="selectedStepId() === step.id"
+                [attr.aria-pressed]="selectedStepId() === step.id"
+                (click)="selectStep(step.id)"
+              >
+                <span class="step-icon"><app-icon [name]="step.icon" [size]="24" /></span>
+                <span>{{ step.title }}</span>
+              </button>
+            </li>
+          }
+        </ol>
+        <div class="detail detail--flow" aria-live="polite">
+          <span class="detail-icon"><app-icon [name]="selectedStep().icon" [size]="28" /></span>
+          <h3>{{ selectedStep().title }}</h3>
+          <p>{{ selectedStep().detail }}</p>
+          <p class="hint">The migration of legacy frontend assets into reusable component libraries is part of my Eurofins role; the intermediate layers illustrate the general pattern.</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="topics-head">
+    <h3>Architecture capabilities</h3>
+    <div class="filters" role="group" aria-label="Filter capabilities">
+      <button type="button" class="chip" [class.selected]="topicFilter() === 'all'" [attr.aria-pressed]="topicFilter() === 'all'" (click)="setTopicFilter('all')">All</button>
+      <button type="button" class="chip" [class.selected]="topicFilter() === 'resume'" [attr.aria-pressed]="topicFilter() === 'resume'" (click)="setTopicFilter('resume')">Resume-backed</button>
+      <button type="button" class="chip" [class.selected]="topicFilter() === 'interest'" [attr.aria-pressed]="topicFilter() === 'interest'" (click)="setTopicFilter('interest')">Interests</button>
+    </div>
+  </div>
+
+  <ul class="topics">
+    @for (t of visibleTopics(); track t.id) {
+      <li class="topic glass" [class.interest]="t.source === 'interest'" appTilt="6" animate.enter="swap">
+        <span class="t-icon"><app-icon [name]="t.icon" [size]="22" /></span>
+        <div>
+          <h4>{{ t.title }}</h4>
+          <p>{{ t.description }}</p>
+          @if (t.evidence) {
+            <span class="evidence">{{ t.evidence }}</span>
+          } @else {
+            <span class="evidence interest">Architectural interest</span>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</div>

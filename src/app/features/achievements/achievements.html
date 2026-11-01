@@ -1,0 +1,39 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="Career achievements"
+    title="Results that came from the work"
+    lead="Every figure below comes straight from my résumé — no inflated metrics."
+    headingId="achievements-title"
+  />
+
+  <ul class="cards">
+    @for (a of achievements; track a.id; let i = $index) {
+      <li class="card glass" appTilt="7" [appReveal]="(i % 3) * 80">
+        <span class="icon"><app-icon [name]="a.icon" [size]="24" /></span>
+        @if (a.metric; as m) {
+          <p class="metric gradient-text"><app-counter [value]="m.value" [suffix]="m.suffix" /></p>
+        }
+        <h3>{{ a.title }}</h3>
+        <p class="detail">{{ a.detail }}</p>
+      </li>
+    }
+  </ul>
+
+  <div class="charts">
+    <figure class="chart-card glass" [appReveal]="0">
+      <figcaption>
+        <h3>Career progression</h3>
+        <p>Time spent at each organization, from the first web design role to today.</p>
+      </figcaption>
+      <app-chart [option]="tenure()" [height]="300" ariaLabel="Bar chart of years spent at each organization, from Scubez Solution to Eurofins." />
+    </figure>
+
+    <figure class="chart-card glass" [appReveal]="120">
+      <figcaption>
+        <h3>Angular versions delivered</h3>
+        <p>Angular major version used by each listed Angular project, by project start.</p>
+      </figcaption>
+      <app-chart [option]="journey()" [height]="300" ariaLabel="Line chart of the Angular version used by each project: Visa 8, DCMS 9, EMS 10, GMA 12 and Assurance IQ 18." />
+    </figure>
+  </div>
+</div>

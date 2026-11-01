@@ -1,0 +1,41 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="About me"
+    title="Architecting enterprise front ends for 18+ years"
+    headingId="about-title"
+  />
+
+  <div class="layout">
+    <div class="story">
+      @for (p of paragraphs; track $index) {
+        <p [appReveal]="$index * 90">{{ p }}</p>
+      }
+      <blockquote [appReveal]="280">
+        <app-icon name="sparkles" [size]="22" />
+        <p>{{ tagline }}</p>
+      </blockquote>
+
+      <ul class="focus" aria-label="Areas of focus">
+        @for (item of focus; track item.label; let i = $index) {
+          <li [appReveal]="i * 40">
+            <app-icon [name]="item.icon" [size]="18" />
+            {{ item.label }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="stats" role="list">
+      @for (stat of stats; track stat.label; let i = $index) {
+        <article class="stat glass" role="listitem" appTilt [appReveal]="i * 90">
+          <app-icon class="stat-icon" [name]="stat.icon" [size]="26" />
+          <p class="value gradient-text">
+            <app-counter [value]="stat.value" [suffix]="stat.suffix" />
+          </p>
+          <h3>{{ stat.label }}</h3>
+          <p class="context">{{ stat.context }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</div>

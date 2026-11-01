@@ -1,0 +1,70 @@
+// Design tokens. Light is the :root default; dark overrides under .app-dark (set by ThemeService).
+:root {
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Sora', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+
+  // spacing + shape
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-section: clamp(4.5rem, 9vw, 7.5rem);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 26px;
+  --container: 1180px;
+  --header-h: 72px;
+
+  // palette – light
+  --bg: #f5f7fc;
+  --bg-alt: #eaeefa;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-solid: #ffffff;
+  --border: rgba(30, 41, 90, 0.12);
+  --text: #0f172a;
+  --text-muted: #475569;
+  --accent: #4f46e5;
+  --accent-2: #0e7490;
+  --accent-3: #7c3aed;
+  --on-accent: #ffffff;
+  --chip-bg: rgba(79, 70, 229, 0.07);
+  --chip-bg-hover: rgba(79, 70, 229, 0.14);
+  --shadow: 0 12px 40px -16px rgba(30, 41, 90, 0.28);
+  --shadow-lg: 0 28px 70px -24px rgba(30, 41, 90, 0.4);
+  --glow-color: rgba(99, 102, 241, 0.12);
+  --particle-rgb: 79, 70, 229;
+  --grad: linear-gradient(120deg, #4f46e5 0%, #7c3aed 45%, #0891b2 100%);
+  --grad-text: linear-gradient(110deg, #4338ca 0%, #7c3aed 50%, #0e7490 100%);
+  --header-bg: rgba(245, 247, 252, 0.82);
+  --focus: #4f46e5;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root.app-dark {
+  --bg: #070b1a;
+  --bg-alt: #0b1124;
+  --surface: rgba(20, 28, 56, 0.58);
+  --surface-solid: #111a35;
+  --border: rgba(148, 163, 255, 0.16);
+  --text: #eef2ff;
+  --text-muted: #a7b2d1;
+  --accent: #818cf8;
+  --accent-2: #67e8f9;
+  --accent-3: #c4b5fd;
+  --on-accent: #0b1020;
+  --chip-bg: rgba(129, 140, 248, 0.1);
+  --chip-bg-hover: rgba(129, 140, 248, 0.2);
+  --shadow: 0 14px 44px -18px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 30px 80px -26px rgba(0, 0, 0, 0.85);
+  --glow-color: rgba(129, 140, 248, 0.16);
+  --particle-rgb: 165, 180, 252;
+  --grad: linear-gradient(120deg, #6366f1 0%, #8b5cf6 45%, #06b6d4 100%);
+  --grad-text: linear-gradient(110deg, #a5b4fc 0%, #c4b5fd 45%, #67e8f9 100%);
+  --header-bg: rgba(7, 11, 26, 0.78);
+  --focus: #a5b4fc;
+}

@@ -1,0 +1,32 @@
+// Native form controls styled with the design tokens.
+.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--chip-bg-hover);
+  }
+
+  &.is-invalid {
+    border-color: #ef4444;
+  }
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 7rem;
+}

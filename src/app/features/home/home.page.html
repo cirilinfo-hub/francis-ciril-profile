@@ -1,0 +1,66 @@
+<app-hero />
+
+<section id="about" class="section" aria-labelledby="about-title">
+  @defer (on idle) {
+    <app-about />
+    <app-competencies />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="skills" class="section section--alt" aria-labelledby="skills-title">
+  @defer (on idle) {
+    <app-skills />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="experience" class="section" aria-labelledby="experience-title">
+  @defer (on idle) {
+    <app-experience />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="projects" class="section section--alt" aria-labelledby="projects-title">
+  @defer (on idle) {
+    <app-projects />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="architecture" class="section" aria-labelledby="architecture-title">
+  @defer (on idle) {
+    <app-architecture />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="achievements" class="section section--alt" aria-labelledby="achievements-title">
+  @defer (on idle) {
+    <app-achievements />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="education" class="section" aria-labelledby="education-title">
+  @defer (on idle) {
+    <app-education />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>
+
+<section id="contact" class="section section--alt" aria-labelledby="contact-title">
+  @defer (on idle) {
+    <app-contact />
+  } @placeholder {
+    <div class="container"><app-section-skeleton /></div>
+  }
+</section>

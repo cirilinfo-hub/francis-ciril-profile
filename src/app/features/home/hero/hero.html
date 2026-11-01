@@ -1,0 +1,79 @@
+<section id="home" class="hero" aria-labelledby="hero-title">
+  <div class="aurora" aria-hidden="true"><span class="blob"></span></div>
+  <app-particles />
+
+  <div class="container grid">
+    <div class="copy">
+      <p class="hello rise" style="--d: 0ms">
+        <span class="dot" aria-hidden="true"></span> Hello, I'm
+      </p>
+      <h1 id="hero-title" class="rise" style="--d: 120ms">
+        <span class="gradient-text">{{ profile.name }}</span>
+      </h1>
+      <p class="role rise" style="--d: 240ms">
+        <app-typing-text [phrases]="profile.designations" />
+      </p>
+      <p class="summary rise" style="--d: 360ms">{{ profile.summary[0] }}</p>
+
+      <ul class="clients rise" style="--d: 440ms" aria-label="Selected clients">
+        @for (client of clients; track client) {
+          <li>{{ client }}</li>
+        }
+      </ul>
+
+      <div class="cta rise" style="--d: 520ms">
+        <a class="btn btn-primary" href="#contact" appRipple (click)="go($event, 'contact')">
+          <app-icon name="mail" [size]="18" /> Contact Me
+        </a>
+        <button type="button" class="btn btn-ghost" appRipple (click)="download()">
+          <app-icon name="download" [size]="18" /> Download Resume
+        </button>
+        <ul class="social" aria-label="Social profiles">
+          @for (link of profile.social; track link.id) {
+            <li>
+              <a
+                class="icon-btn"
+                appRipple
+                [href]="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="link.label + ' (opens in a new tab)'"
+              >
+                @if (link.id === 'github') {
+                  <app-icon name="github" [size]="20" />
+                } @else {
+                  <span class="in" aria-hidden="true">in</span>
+                }
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="visual rise" style="--d: 300ms">
+      <div class="portrait-wrap">
+        <span class="ring ring--1" aria-hidden="true"></span>
+        <span class="ring ring--2" aria-hidden="true"></span>
+        <div class="portrait glass">
+          @if (profile.photoUrl) {
+            <img [src]="profile.photoUrl" [alt]="'Portrait of ' + profile.name" width="320" height="320" fetchpriority="high" />
+          } @else {
+            <span class="initials" role="img" [attr.aria-label]="'Monogram of ' + profile.name">{{ profile.initials }}</span>
+          }
+        </div>
+        @for (chip of floating; track chip.label; let i = $index) {
+          <span class="float-chip glass" [class]="'float-chip glass pos-' + i" [style.--i]="i" aria-hidden="true">
+            <app-icon [name]="chip.icon" [size]="18" /> {{ chip.label }}
+          </span>
+        }
+        <span class="years glass"><strong>18+</strong> years</span>
+      </div>
+    </div>
+  </div>
+
+  <a class="scroll-hint" href="#about" (click)="go($event, 'about')" aria-label="Scroll to About section">
+    <span class="mouse" aria-hidden="true"><span class="wheel"></span></span>
+    <span>Scroll</span>
+  </a>
+</section>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Francis Ciril Arulsamy | Front-End Architect &amp; Angular Architect</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Francis Ciril Arulsamy — Front-End Architect with 18+ years building scalable Angular and React platforms, UI design systems and reusable components for enterprise clients.">
+  <meta name="theme-color" content="#070b1a">
+  <meta property="og:title" content="Francis Ciril Arulsamy | Front-End Architect">
+  <meta property="og:description" content="18+ years architecting enterprise Angular and React front ends, UI design systems and reusable component libraries.">
+  <meta property="og:type" content="profile">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap">
+  <script>
+    // Apply the saved/system theme before first paint to avoid a flash.
+    (function () {
+      try {
+        var t = localStorage.getItem('portfolio-theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        if (t === 'dark') document.documentElement.classList.add('app-dark');
+        document.documentElement.style.colorScheme = t;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+  <noscript>This portfolio needs JavaScript. Francis Ciril Arulsamy — Front-End Architect, Angular Architect, UI Architect, Front-End Manager.</noscript>
+</body>
+</html>

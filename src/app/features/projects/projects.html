@@ -1,0 +1,123 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="Project portfolio"
+    title="Enterprise platforms I've helped deliver"
+    lead="Selected engagements from Eurofins, Cisco, Transaction Data Systems, Intel and Visa. Client-confidential details, screenshots and internal data are deliberately omitted."
+    headingId="projects-title"
+  />
+
+  <div class="filters" role="group" aria-label="Filter projects by category">
+    @for (c of categories; track c) {
+      <button
+        type="button"
+        class="chip"
+        appRipple
+        [class.selected]="filter() === c"
+        [attr.aria-pressed]="filter() === c"
+        (click)="setFilter(c)"
+      >
+        {{ c }}
+      </button>
+    }
+  </div>
+  <p class="sr-only" aria-live="polite">Showing {{ visible().length }} of {{ all.length }} projects.</p>
+
+  <ul class="grid">
+    @for (p of visible(); track p.id) {
+      <li animate.enter="card-in" animate.leave="card-out">
+        <article class="card glass" appTilt="7" [style.--accent-p]="p.accent">
+          <div class="art" aria-hidden="true">
+            <span class="art-icon"><app-icon [name]="p.icon" [size]="38" /></span>
+            <span class="art-name">{{ p.shortName }}</span>
+            <span class="bars"><i></i><i></i><i></i></span>
+          </div>
+          <div class="content">
+            <p class="client">{{ p.client }} <span class="domain">· {{ p.domain }}</span></p>
+            <h3>
+              <button type="button" class="open" (click)="open(p)" [attr.aria-label]="'View details: ' + p.title">
+                {{ p.title }}
+              </button>
+            </h3>
+            <p class="duration"><app-icon name="calendar" [size]="14" /> {{ p.durationLabel }}</p>
+            <p class="overview">{{ p.overview }}</p>
+            <ul class="stack" aria-label="Technology stack">
+              @for (t of p.stack.slice(0, 5); track t) {
+                <li><app-tech-badge [name]="t" /></li>
+              }
+              @if (p.stack.length > 5) {
+                <li class="more">+{{ p.stack.length - 5 }}</li>
+              }
+            </ul>
+            <span class="cta">View details <app-icon name="arrow-up-right" [size]="16" /></span>
+          </div>
+        </article>
+      </li>
+    }
+  </ul>
+</div>
+
+<dialog
+  #dialog
+  class="modal"
+  aria-labelledby="project-dialog-title"
+  (close)="close()"
+>
+  @if (selected(); as p) {
+    <div class="modal-body">
+      <header class="modal-head">
+        <h3 id="project-dialog-title">{{ p.title }}</h3>
+        <button type="button" class="icon-btn" appRipple aria-label="Close project details" (click)="close()">
+          <app-icon name="x" [size]="20" />
+        </button>
+      </header>
+
+      <div class="detail">
+        <p class="d-meta">
+          <span><app-icon name="building-2" [size]="16" /> {{ p.client }}</span>
+          <span><app-icon name="calendar" [size]="16" /> {{ p.durationLabel }}</span>
+          <span><app-icon name="briefcase" [size]="16" /> {{ p.domain }}</span>
+        </p>
+        @if (p.dateNote) {
+          <p class="note"><app-icon name="info" [size]="16" /> {{ p.dateNote }}</p>
+        }
+
+        <h4>Overview</h4>
+        <p>{{ p.overview }}</p>
+
+        <h4>Technology stack</h4>
+        <div class="d-tech">
+          @for (t of p.stack; track t) {
+            <app-tech-badge [name]="t" />
+          }
+        </div>
+
+        <div class="d-cols">
+          <div>
+            <h4>Key responsibilities</h4>
+            <ul>
+              @for (r of p.responsibilities; track r) {
+                <li>{{ r }}</li>
+              }
+            </ul>
+          </div>
+          <div>
+            <h4>Architecture highlights</h4>
+            <ul>
+              @for (a of p.architecture; track a) {
+                <li>{{ a }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+        <p class="confidential">
+          <app-icon name="lock" [size]="14" /> No screenshots or internal system details are shown to respect client confidentiality.
+        </p>
+      </div>
+
+      <footer class="d-footer">
+        <button type="button" class="btn btn-ghost" appRipple (click)="step(-1)"><app-icon name="chevron-down" class="rot-l" [size]="16" /> Previous</button>
+        <button type="button" class="btn btn-primary" appRipple (click)="step(1)">Next <app-icon name="chevron-down" class="rot-r" [size]="16" /></button>
+      </footer>
+    </div>
+  }
+</dialog>

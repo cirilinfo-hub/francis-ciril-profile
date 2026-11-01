@@ -1,0 +1,142 @@
+:host {
+  display: block;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.cards {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  transition:
+    transform 0.2s var(--ease),
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateX(4px);
+    border-color: var(--accent);
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--chip-bg-hover);
+    color: var(--accent);
+  }
+
+  .in {
+    font: 800 1rem/1 var(--font-display);
+  }
+
+  .label {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .value,
+  a {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+    text-decoration-color: var(--accent);
+  }
+}
+
+.form {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  display: grid;
+  gap: 1.1rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .btn {
+    justify-self: start;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+.err {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #dc2626;
+}
+
+:host-context(.app-dark) .err {
+  color: #fca5a5;
+}
+
+.banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+
+  app-icon {
+    margin-top: 0.1rem;
+  }
+
+  &.ok {
+    background: color-mix(in srgb, #22c55e 14%, transparent);
+    border-color: color-mix(in srgb, #22c55e 40%, transparent);
+  }
+
+  &.bad {
+    background: color-mix(in srgb, #ef4444 14%, transparent);
+    border-color: color-mix(in srgb, #ef4444 40%, transparent);
+  }
+
+  &.warn {
+    background: color-mix(in srgb, #f59e0b 14%, transparent);
+    border-color: color-mix(in srgb, #f59e0b 40%, transparent);
+  }
+}
+
+.status:empty {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

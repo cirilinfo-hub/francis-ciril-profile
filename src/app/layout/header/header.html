@@ -1,0 +1,48 @@
+<div class="bar container">
+  <a class="brand" href="#home" aria-label="Francis Ciril Arulsamy — back to top" (click)="goHome($event)">
+    <span class="monogram">{{ profile.initials }}</span>
+    <span class="brand-name">{{ profile.name }}</span>
+  </a>
+
+  <div class="desktop-nav">
+    <app-navigation variant="bar" />
+  </div>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="icon-btn"
+      appRipple
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.mode() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      <app-icon [name]="theme.mode() === 'dark' ? 'sun' : 'moon'" [size]="20" />
+    </button>
+    <button type="button" class="btn btn-primary resume-btn" appRipple (click)="downloadResume()">
+      <app-icon name="download" [size]="16" />
+      Resume
+    </button>
+    <button
+      type="button"
+      class="icon-btn menu-btn"
+      appRipple
+      aria-controls="mobile-menu"
+      [attr.aria-expanded]="menuOpen()"
+      [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
+      (click)="toggleMenu()"
+    >
+      <app-icon [name]="menuOpen() ? 'x' : 'menu'" [size]="22" />
+    </button>
+  </div>
+</div>
+
+@if (menuOpen()) {
+  <button type="button" class="backdrop" tabindex="-1" aria-label="Close menu" animate.enter="fade-in" animate.leave="fade-out" (click)="closeMenu()"></button>
+  <div id="mobile-menu" class="drawer glass" animate.enter="drawer-in" animate.leave="drawer-out">
+    <app-navigation variant="drawer" (navigated)="closeMenu()" />
+    <button type="button" class="btn btn-primary drawer-resume" appRipple (click)="downloadResume()">
+      <app-icon name="download" [size]="16" />
+      Download Resume
+    </button>
+  </div>
+}

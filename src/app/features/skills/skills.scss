@@ -1,0 +1,149 @@
+:host {
+  display: block;
+}
+
+.featured {
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+
+  .feature-icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+    background: var(--chip-bg-hover);
+    color: var(--accent);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.chip {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font: 500 0.85rem/1 var(--font-body);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s var(--ease);
+
+  &:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  &.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 1rem;
+}
+
+.group {
+  padding: 1.4rem;
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1rem;
+    font-size: 1.02rem;
+
+    app-icon {
+      color: var(--accent-2);
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+.skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  animation: pop 0.45s var(--ease) both;
+  animation-delay: calc(var(--i) * 35ms);
+  transition:
+    transform 0.2s var(--ease),
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.04);
+    border-color: var(--accent);
+    background: var(--chip-bg-hover);
+  }
+
+  &.primary {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--chip-bg);
+    font-weight: 600;
+  }
+}
+
+.group-in {
+  animation: pop 0.5s var(--ease) both;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(8px);
+  }
+}

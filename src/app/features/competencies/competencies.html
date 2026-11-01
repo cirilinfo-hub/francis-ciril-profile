@@ -1,0 +1,49 @@
+<div class="container wrap">
+  <app-section-heading
+    eyebrow="Core competencies"
+    title="What I bring to a team"
+    lead="Three pillars that connect architecture decisions to engineering quality and reliable delivery."
+    headingId="competencies-title"
+  />
+
+  <div class="tabs" role="tablist" aria-label="Competency categories" appReveal>
+    @for (cat of categories; track cat.id; let i = $index) {
+      <button
+        type="button"
+        role="tab"
+        class="tab"
+        [id]="'tab-' + cat.id"
+        [class.selected]="cat.id === activeId()"
+        [attr.aria-selected]="cat.id === activeId()"
+        [attr.aria-controls]="'panel-' + cat.id"
+        [attr.tabindex]="cat.id === activeId() ? 0 : -1"
+        (click)="select(cat.id)"
+        (keydown)="onKeydown($event, i)"
+      >
+        <app-icon [name]="cat.icon" [size]="20" />
+        {{ cat.title }}
+      </button>
+    }
+  </div>
+
+  @for (cat of [active()]; track cat.id) {
+    <div
+      class="panel"
+      role="tabpanel"
+      [id]="'panel-' + cat.id"
+      [attr.aria-labelledby]="'tab-' + cat.id"
+      tabindex="0"
+      animate.enter="panel-in"
+    >
+      <p class="blurb">{{ cat.blurb }}</p>
+      <ul class="cards">
+        @for (item of cat.items; track item.label; let i = $index) {
+          <li class="card glass" appTilt="10" [style.--i]="i">
+            <span class="icon"><app-icon [name]="item.icon" [size]="24" /></span>
+            <span class="label">{{ item.label }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>

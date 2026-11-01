@@ -1,0 +1,97 @@
+import type { SkillGroup } from '../core/models/portfolio.models';
+
+export const SKILL_GROUPS: readonly SkillGroup[] = [
+  {
+    id: 'frameworks',
+    title: 'Front-End Frameworks',
+    icon: 'layers',
+    skills: [
+      { name: 'Angular (2–21)', icon: 'angular', primary: true },
+      { name: 'AngularJS (1.x)', icon: 'file-code' },
+      { name: 'React', icon: 'react', primary: true },
+      { name: 'Redux', icon: 'redux' },
+    ],
+  },
+  {
+    id: 'languages',
+    title: 'Languages & Markup',
+    icon: 'code-xml',
+    skills: [
+      { name: 'TypeScript', icon: 'typescript', primary: true },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'HTML5', icon: 'html5' },
+      { name: 'CSS3', icon: 'css3' },
+      { name: 'XML', icon: 'file-code' },
+    ],
+  },
+  {
+    id: 'ui',
+    title: 'UI Frameworks & Styling',
+    icon: 'palette',
+    skills: [
+      { name: 'Angular Material', icon: 'materialdesign' },
+      { name: 'PrimeNG', icon: 'primeng' },
+      { name: 'Bootstrap', icon: 'bootstrap' },
+      { name: 'Foundation', icon: 'layout-dashboard' },
+      { name: 'SCSS/Sass', icon: 'sass' },
+      { name: 'LESS', icon: 'less' },
+      { name: 'UI Grids', icon: 'file-spreadsheet' },
+    ],
+  },
+  {
+    id: 'libraries',
+    title: 'Libraries & Integrations',
+    icon: 'puzzle',
+    skills: [
+      { name: 'jQuery', icon: 'jquery' },
+      { name: 'jQuery UI', icon: 'wand-sparkles' },
+      { name: 'jQuery Mobile', icon: 'smartphone' },
+      { name: 'NG Select', icon: 'filter' },
+      { name: 'DataTables', icon: 'file-spreadsheet' },
+      { name: 'NVD3', icon: 'chart-column' },
+      { name: 'Google Maps API', icon: 'googlemaps' },
+      { name: 'D3', icon: 'd3' },
+    ],
+  },
+  {
+    id: 'backend',
+    title: 'Backend, APIs & CMS',
+    icon: 'server',
+    skills: [
+      { name: 'REST APIs', icon: 'network' },
+      { name: 'Node.js', icon: 'nodejs' },
+      { name: '.NET', icon: 'dotnet' },
+      { name: 'Java', icon: 'java' },
+      { name: 'Java Spring', icon: 'spring' },
+      { name: 'PHP', icon: 'php' },
+      { name: 'Adobe CQ5', icon: 'boxes' },
+      { name: 'Python', icon: 'python' },
+      { name: 'GraphQL', icon: 'graphql' },
+    ],
+  },
+  {
+    id: 'databases',
+    title: 'Databases',
+    icon: 'database',
+    skills: [
+      { name: 'MySQL', icon: 'mysql' },
+      { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'Firebase', icon: 'firebase' },
+    ],
+  },
+  {
+    id: 'tools',
+    title: 'Design & Development Tools',
+    icon: 'wrench',
+    skills: [
+      { name: 'Visual Studio Code', icon: 'code-xml' },
+      { name: 'Figma', icon: 'figma' },
+      { name: 'Photoshop', icon: 'paintbrush' },
+      { name: 'Dreamweaver', icon: 'pen-tool' },
+      { name: 'Docker', icon: 'docker' },
+      { name: 'Kubernetes', icon: 'kubernetes' },
+      { name: 'AI Tools', icon: 'bot' },
+      { name: 'Azure', icon: 'cloud' },
+    ],
+  },
+];

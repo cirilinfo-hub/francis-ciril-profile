@@ -1,0 +1,51 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="Technical skills"
+    title="Tools I architect and ship with"
+    lead="Grouped by role in the stack. No proficiency scores — just the technologies I have worked with across enterprise projects."
+    headingId="skills-title"
+  />
+
+  <ul class="featured" aria-label="Primary expertise">
+    @for (f of featured; track f.name; let i = $index) {
+      <li class="feature glass" appTilt="9" [appReveal]="i * 80">
+        <span class="feature-icon"><app-icon [name]="f.icon" [size]="34" /></span>
+        <div>
+          <h3>{{ f.name }}</h3>
+          <p>{{ f.note }}</p>
+        </div>
+      </li>
+    }
+  </ul>
+
+  <div class="filters" role="group" aria-label="Filter technologies">
+    @for (f of filters; track f.id) {
+      <button
+        type="button"
+        class="chip"
+        [class.selected]="filter() === f.id"
+        [attr.aria-pressed]="filter() === f.id"
+        (click)="setFilter(f.id)"
+      >
+        {{ f.label }}
+      </button>
+    }
+  </div>
+  <p class="sr-only" aria-live="polite">Showing {{ count() }} technologies.</p>
+
+  <div class="groups">
+    @for (group of visible(); track group.id) {
+      <article class="group glass" animate.enter="group-in">
+        <h3><app-icon [name]="group.icon" [size]="20" /> {{ group.title }}</h3>
+        <ul>
+          @for (skill of group.skills; track skill.name; let i = $index) {
+            <li class="skill" [class.primary]="skill.primary" [style.--i]="i">
+              <app-icon [name]="skill.icon" [size]="18" />
+              {{ skill.name }}
+            </li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+</div>

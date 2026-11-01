@@ -1,0 +1,128 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="Contact"
+    title="Let's talk front-end architecture"
+    lead="Open to conversations about front-end architecture, Angular and React platforms, and technical leadership."
+    headingId="contact-title"
+  />
+
+  <div class="layout">
+    <div class="info" appReveal>
+      <ul class="cards">
+        @if (profile.contact.email) {
+          <li class="card glass">
+            <span class="icon"><app-icon name="mail" [size]="22" /></span>
+            <div>
+              <p class="label">Email</p>
+              <a [href]="'mailto:' + profile.contact.email">{{ profile.contact.email }}</a>
+            </div>
+          </li>
+        }
+        @if (profile.contact.phone) {
+          <li class="card glass">
+            <span class="icon"><app-icon name="phone" [size]="22" /></span>
+            <div>
+              <p class="label">Phone</p>
+              <a [href]="'tel:' + profile.contact.phone">{{ profile.contact.phone }}</a>
+            </div>
+          </li>
+        }
+        <li class="card glass">
+          <span class="icon"><app-icon name="map-pin" [size]="22" /></span>
+          <div>
+            <p class="label">Location</p>
+            <p class="value">{{ profile.contact.location }}</p>
+          </div>
+        </li>
+        @for (link of profile.social; track link.id) {
+          <li class="card glass">
+            <span class="icon">
+              @if (link.id === 'github') {
+                <app-icon name="github" [size]="22" />
+              } @else {
+                <span class="in" aria-hidden="true">in</span>
+              }
+            </span>
+            <div>
+              <p class="label">{{ link.label }}</p>
+              <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+                View {{ link.label }} profile <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
+          </li>
+        }
+      </ul>
+
+      <button type="button" class="btn btn-primary resume" appRipple (click)="downloadResume()">
+        <app-icon name="download" [size]="18" /> Download Resume
+      </button>
+    </div>
+
+    <form class="form glass" [formGroup]="form" (ngSubmit)="submit()" novalidate appReveal [appReveal]="120">
+      <h3>Send a message</h3>
+
+      @if (!canSubmit) {
+        <p class="banner warn" role="note">
+          <app-icon name="info" [size]="18" />
+          Messaging isn't connected yet. Please reach out through LinkedIn in the meantime.
+        </p>
+      }
+
+      <div class="field">
+        <label for="c-name">Name</label>
+        <input class="form-control" id="c-name" formControlName="name" autocomplete="name" [class.is-invalid]="error('name')" [attr.aria-invalid]="!!error('name')" [attr.aria-describedby]="error('name') ? 'c-name-err' : null" />
+        @if (error('name'); as msg) {
+          <p class="err" id="c-name-err" role="alert">{{ msg }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="c-email">Email</label>
+        <input class="form-control" id="c-email" type="email" formControlName="email" autocomplete="email" [class.is-invalid]="error('email')" [attr.aria-invalid]="!!error('email')" [attr.aria-describedby]="error('email') ? 'c-email-err' : null" />
+        @if (error('email'); as msg) {
+          <p class="err" id="c-email-err" role="alert">{{ msg }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="c-subject">Subject</label>
+        <input class="form-control" id="c-subject" formControlName="subject" [class.is-invalid]="error('subject')" [attr.aria-invalid]="!!error('subject')" [attr.aria-describedby]="error('subject') ? 'c-subject-err' : null" />
+        @if (error('subject'); as msg) {
+          <p class="err" id="c-subject-err" role="alert">{{ msg }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="c-message">Message</label>
+        <textarea class="form-control" id="c-message" rows="5" formControlName="message" [class.is-invalid]="error('message')" [attr.aria-invalid]="!!error('message')" [attr.aria-describedby]="error('message') ? 'c-message-err' : null"></textarea>
+        @if (error('message'); as msg) {
+          <p class="err" id="c-message-err" role="alert">{{ msg }}</p>
+        }
+      </div>
+
+      <button type="submit" class="btn btn-primary" appRipple [disabled]="!canSubmit || state().kind === 'sending'">
+        @if (state().kind === 'sending') {
+          Sendingâ€¦
+        } @else {
+          <app-icon name="send" [size]="18" /> Send message
+        }
+      </button>
+
+      <div class="status" aria-live="polite">
+        @let s = state();
+        @if (s.kind === 'done') {
+          @if (s.outcome === 'sent') {
+            <p class="banner ok"><app-icon name="circle-check" [size]="18" /> Thank you — your message was delivered.</p>
+          } @else {
+            <p class="banner ok">
+              <app-icon name="circle-check" [size]="18" />
+              Your email app should now be open with the message ready. It hasn't been sent until you press send there.
+            </p>
+          }
+        } @else if (s.kind === 'error') {
+          <p class="banner bad" role="alert"><app-icon name="circle-alert" [size]="18" /> {{ s.message }}</p>
+        }
+      </div>
+    </form>
+  </div>
+</div>

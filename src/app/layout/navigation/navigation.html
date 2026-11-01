@@ -1,0 +1,19 @@
+<nav [class]="'nav nav--' + variant()" [attr.aria-label]="variant() === 'bar' ? 'Primary' : 'Mobile'">
+  <ul>
+    @for (item of items; track item.id) {
+      <li>
+        <a
+          [href]="'#' + item.id"
+          [class.active]="spy.active() === item.id"
+          [attr.aria-current]="spy.active() === item.id ? 'location' : null"
+          (click)="go($event, item.id)"
+        >
+          @if (variant() === 'drawer') {
+            <app-icon [name]="item.icon" [size]="20" />
+          }
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

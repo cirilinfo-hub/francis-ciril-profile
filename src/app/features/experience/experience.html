@@ -1,0 +1,81 @@
+<div class="container">
+  <app-section-heading
+    eyebrow="Professional experience"
+    title="From web designer to front-end architect"
+    lead="Six organizations, one steady progression of scope — designing pages, leading teams, defining UI architecture, and setting technology direction."
+    headingId="experience-title"
+  />
+
+  <div class="toolbar">
+    <button type="button" class="btn btn-ghost" (click)="toggleAll()">
+      <app-icon [name]="allOpen() ? 'chevron-up' : 'chevron-down'" [size]="16" />
+      {{ allOpen() ? 'Collapse all' : 'Expand all' }}
+    </button>
+  </div>
+
+  <ol class="timeline">
+    @for (job of jobs; track job.id; let i = $index) {
+      <li class="entry" [class.current]="job.end === null" [appReveal]="40">
+        <span class="node" aria-hidden="true"></span>
+
+        <article class="card glass">
+          <h3 class="head">
+            <button
+              type="button"
+              class="toggle"
+              [attr.aria-expanded]="isOpen(job.id)"
+              [attr.aria-controls]="'exp-' + job.id"
+              (click)="toggle(job.id)"
+            >
+              <span class="titles">
+                <span class="company">{{ job.company }}</span>
+                <span class="role">{{ job.role }}</span>
+              </span>
+              <span class="meta">
+                <span class="period">{{ job.start | dateRange: job.end }}</span>
+                <span class="sub">{{ job.start | duration: job.end }} · {{ job.location }}</span>
+              </span>
+              <span class="chevron" [class.rotated]="isOpen(job.id)"><app-icon name="chevron-down" [size]="20" /></span>
+            </button>
+          </h3>
+
+          <div class="body" [class.open]="isOpen(job.id)" [id]="'exp-' + job.id" [attr.inert]="isOpen(job.id) ? null : ''">
+            <div class="body-inner">
+              <p class="summary">{{ job.summary }}</p>
+
+              @if (job.clients) {
+                <p class="label">Client engagements</p>
+                <ul class="pills">
+                  @for (client of job.clients; track client) {
+                    <li>{{ client }}</li>
+                  }
+                </ul>
+              }
+
+              <p class="label">Achievements</p>
+              <ul class="achievements">
+                @for (a of job.achievements; track a) {
+                  <li><app-icon name="circle-check" [size]="18" /> {{ a }}</li>
+                }
+              </ul>
+
+              <p class="label">Responsibilities</p>
+              <ul class="resp">
+                @for (r of job.responsibilities; track r) {
+                  <li>{{ r }}</li>
+                }
+              </ul>
+
+              <p class="label">Technologies</p>
+              <div class="tech">
+                @for (t of job.technologies; track t) {
+                  <app-tech-badge [name]="t" />
+                }
+              </div>
+            </div>
+          </div>
+        </article>
+      </li>
+    }
+  </ol>
+</div>
